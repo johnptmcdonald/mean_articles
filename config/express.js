@@ -1,8 +1,10 @@
+var config = require('./config')
 var express = require('express')
 var morgan = require('morgan')
 var compress = require('compression')
 var bodyParser = require('body-parser')
 var methodOverride = require('method-override')
+var session = require('express-session')
 
 
 module.exports = function(){
@@ -19,6 +21,11 @@ module.exports = function(){
 	app.use(methodOverride())
 	app.set('views', './app/views')
 	app.set('view engine', 'ejs')
+	app.use(session({
+		saveUninitialized: true,
+		resave: true,
+		secret: config.secret
+	}))
 
 	require('../app/routes/index.server.routes.js')(app)
 
