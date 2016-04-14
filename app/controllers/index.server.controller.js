@@ -7,6 +7,7 @@ module.exports.render = function(req, res){
 
 
 	res.render('index',{
-		title: 'HelloWorld'
+		title: 'HelloWorld',
+		userFullName: req.user ? req.user.fullName : ""
 	})
 }

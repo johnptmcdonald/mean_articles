@@ -5,6 +5,8 @@ var compress = require('compression')
 var bodyParser = require('body-parser')
 var methodOverride = require('method-override')
 var session = require('express-session')
+var flash = require('connect-flash')
+var passport = require('passport')
 
 
 module.exports = function(){
@@ -26,6 +28,11 @@ module.exports = function(){
 		resave: true,
 		secret: config.secret
 	}))
+
+	app.use(flash())
+	app.use(passport.initialize())
+	// the passport.session() part is what looks for and runs our deserialize and serialize functions
+	app.use(passport.session())
 
 	require('../app/routes/index.server.routes.js')(app)
 	require('../app/routes/users.server.routes.js')(app)
