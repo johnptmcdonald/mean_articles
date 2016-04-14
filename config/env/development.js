@@ -1,4 +1,5 @@
 module.exports = {
 	// development configurations here
-	secret: "secret"
+	secret: "secret",
+	db: "mongodb://localhost/mean-articles"
 }
